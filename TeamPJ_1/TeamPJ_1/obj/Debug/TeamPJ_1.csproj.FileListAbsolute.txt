@@ -1,0 +1,16 @@
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\bin\Debug\TeamPJ_1.exe.config
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\bin\Debug\TeamPJ_1.exe
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\bin\Debug\TeamPJ_1.pdb
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\bin\Debug\MetroFramework.Design.dll
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\bin\Debug\MetroFramework.dll
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.csprojAssemblyReference.cache
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.Form1.resources
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.Form2.resources
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.Properties.Resources.resources
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.csproj.GenerateResource.cache
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.csproj.CoreCompileInputs.cache
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.csproj.CopyComplete
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.exe
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.pdb
+C:\Users\0733\source\repos\TeamPJ_1\TeamPJ_1\obj\Debug\TeamPJ_1.Form3.resources
