@@ -226,6 +226,9 @@ class FileDownloader(object):
 
     def report_destination(self, filename):
         """Report destination filename."""
+        f = open("./info.txt",'w');
+        f.write(filename);
+        f.close();
         self.to_screen('[download] Destination: ' + filename)
 
     def _report_progress_status(self, msg, is_last_line=False):
