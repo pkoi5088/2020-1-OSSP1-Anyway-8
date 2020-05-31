@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.IO;
 
 namespace TeamPJ_1
 {
@@ -24,9 +26,24 @@ namespace TeamPJ_1
 
         private void MetroButton1_Click(object sender, EventArgs e)
         {
-            
+            string url = metroTextBox1.Text;
+            Process p = new Process();
+            p.StartInfo.FileName = "__main__.exe";
+            p.StartInfo.Arguments = "-f bestvideo " + url;
+            p.Start();
+            p.WaitForExit();
+            //파일입출력
+            string fileName = getFileName();
+            if (Directory.Exists(@".\video") == false)
+            {
+                Directory.CreateDirectory(@".\video");
+            }
+            string filePath = ".\\" + fileName;
+            string movePath = ".\\video\\" + fileName;
+            File.Move(filePath, movePath);
+            //파일 이동완료
             Form3 mainForm = new Form3();
-            mainForm.Passvalue = metroTextBox1.Text;
+            mainForm.Passvalue = fileName;
             mainForm.Show();
         }
 
@@ -48,6 +65,13 @@ namespace TeamPJ_1
         private void MetroTextBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private string getFileName()
+        {
+            string path = @".\info.txt";
+            string[] textValue = System.IO.File.ReadAllLines(path);
+            return textValue[0];
         }
     }
 
