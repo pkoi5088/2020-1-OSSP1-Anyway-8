@@ -26,6 +26,11 @@ namespace TeamPJ_1
 
         private void MetroButton1_Click(object sender, EventArgs e)
         {
+            //폴더생성
+            if (Directory.Exists(@".\video") == false)
+            {
+                Directory.CreateDirectory(@".\video");
+            }
             string url = metroTextBox1.Text;
             Process p = new Process();
             p.StartInfo.FileName = "__main__.exe";
@@ -34,13 +39,12 @@ namespace TeamPJ_1
             p.WaitForExit();
             //파일입출력
             string fileName = getFileName();
-            if (Directory.Exists(@".\video") == false)
-            {
-                Directory.CreateDirectory(@".\video");
-            }
             string filePath = ".\\" + fileName;
             string movePath = ".\\video\\" + fileName;
-            File.Move(filePath, movePath);
+            if (File.Exists(movePath) == false)
+            {
+                File.Move(filePath, movePath);
+            }
             //파일 이동완료
             Form3 mainForm = new Form3();
             mainForm.Passvalue = fileName;
