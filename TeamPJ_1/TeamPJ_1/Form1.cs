@@ -34,21 +34,28 @@ namespace TeamPJ_1
             string url = metroTextBox1.Text;
             Process p = new Process();
             p.StartInfo.FileName = "__main__.exe";
-            p.StartInfo.Arguments = "-f bestvideo " + url;
+            p.StartInfo.Arguments = "-f \"bestvideo[height<=1080]\" " + url;
             p.Start();
             p.WaitForExit();
             //파일입출력
             string fileName = getFileName();
             string filePath = ".\\" + fileName;
             string movePath = ".\\video\\" + fileName;
-            if (File.Exists(movePath) == false)
+            if (File.Exists(movePath) == false && File.Exists(filePath) == true)
             {
                 File.Move(filePath, movePath);
             }
             //파일 이동완료
-            Form3 mainForm = new Form3();
-            mainForm.Passvalue = fileName;
-            mainForm.Show();
+            if (File.Exists(movePath) == true)
+            {
+                Form3 mainForm = new Form3();
+                mainForm.Passvalue = fileName;
+                mainForm.Show();
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("동영상 파일을 찾지 못했습니다.");
+            }
         }
 
         private void MetroButton2_Click(object sender, EventArgs e)
