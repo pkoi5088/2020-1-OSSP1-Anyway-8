@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "bB8hxLPU1cf/DYVNWNwuMG/hXnBE+LbSNQA+lOZW6b1p7v1Cli800RRDfn8loRGN3i+TgVYH/SHVHw/qi/+CiQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\trick\\Dropbox\\source\\GitHub\\2020-1-OSSP1-Anyway-8\\VidGifCreator\\VidGifCreator.Test\\VidGifCreator.Test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\trick\\.nuget\\packages\\ffmpeg.autogen\\4.2.2.2\\ffmpeg.autogen.4.2.2.2.nupkg.sha512",
+    "C:\\Users\\trick\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\trick\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\trick\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
+    "C:\\Users\\trick\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}
