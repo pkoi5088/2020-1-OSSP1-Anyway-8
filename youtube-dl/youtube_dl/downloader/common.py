@@ -336,13 +336,13 @@ class FileDownloader(object):
 
         nooverwrites_and_exists = (
             self.params.get('nooverwrites', False)
-            and os.path.exists(encodeFilename(filename))
+            and os.path.exists('.\\video\\'+encodeFilename(filename))
         )
 
         if not hasattr(filename, 'write'):
             continuedl_and_exists = (
                 self.params.get('continuedl', True)
-                and os.path.isfile(encodeFilename(filename))
+                and os.path.isfile('.\\video\\'+encodeFilename(filename))
                 and not self.params.get('nopart', False)
             )
 
@@ -352,7 +352,7 @@ class FileDownloader(object):
                 self._hook_progress({
                     'filename': filename,
                     'status': 'finished',
-                    'total_bytes': os.path.getsize(encodeFilename(filename)),
+                    'total_bytes': os.path.getsize('.\\video\\'+encodeFilename(filename)),
                 })
                 return True
 
