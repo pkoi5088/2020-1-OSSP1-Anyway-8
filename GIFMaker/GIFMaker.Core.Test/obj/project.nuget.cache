@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "1TrFLbkhjd9swCETTahHSiizYS847a2AqIeo5LAPe/LiBaET1am8ujPOtd13jjcuOAvnpM/0J2jRMlyTCGLR9w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\trick\\source\\repos\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\trick\\.nuget\\packages\\ffmpeg.autogen\\4.2.2.2\\ffmpeg.autogen.4.2.2.2.nupkg.sha512",
+    "C:\\Users\\trick\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\trick\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\trick\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
+    "C:\\Users\\trick\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}

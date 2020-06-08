@@ -1,0 +1,15 @@
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\bin\Debug\GIFMaker.exe.config
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\bin\Debug\GIFMaker.exe
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\bin\Debug\GIFMaker.pdb
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\bin\Debug\GIFMaker.Core.dll
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\bin\Debug\MetroFramework.Design.dll
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\bin\Debug\MetroFramework.dll
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\bin\Debug\GIFMaker.Core.pdb
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\obj\Debug\GIFMaker.csprojAssemblyReference.cache
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\obj\Debug\GIFMaker.Properties.Resources.resources
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\obj\Debug\GIFMaker.csproj.GenerateResource.cache
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\obj\Debug\GIFMaker.csproj.CoreCompileInputs.cache
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\obj\Debug\GIFMaker.csproj.CopyComplete
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\obj\Debug\GIFMaker.exe
+C:\Users\trick\source\repos\GIFMaker\GIFMaker\obj\Debug\GIFMaker.pdb
