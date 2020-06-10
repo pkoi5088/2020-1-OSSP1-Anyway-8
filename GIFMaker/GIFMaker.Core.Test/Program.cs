@@ -9,8 +9,21 @@ namespace GIFMaker.Core.Test
             using (var creator = new VideoManager())
             {
                 creator.LoadVideo(@"C:\Users\trick\Desktop\1.mp4");
-                creator.SaveGif("test.gif", 50000, 60000, 100);
-                creator.GetBitmapOfVid(60 * 15 * 1000).Save("test.png");
+
+                // SaveGIF를 이용한 GIF 저장 가능
+                GifOption option = new GifOption();
+                option.delay = 1000 / 15;
+                option.start = 180 * 1000;
+                option.end = 185 * 1000;
+                option.width = creator.width / 2;
+                option.height = creator.height / 2;
+
+                creator.SaveGif(option, "test.gif");
+
+                // Seek 및 NextBitmapFrame을 이용한 비트맵 받아오기 및 영상 재생 가능
+                creator.Seek(0);
+                var bmp = creator.NextBitmapFrame().bitmap;
+                bmp.Save("test.png");
             }
         }
     }

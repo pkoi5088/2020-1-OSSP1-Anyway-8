@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rCO6j52lz05ZHH83viclWwyWn/aLhw85FsmAZOVBd8Y0S+qAZT7HwHXQn8l3B/NifnyUwkkQX5hWIrT4swJleQ==",
+  "dgSpecHash": "dxvY4owSyffmEDQLnOG4ew1eTiaFlTc41S9o2RsxaJqIW6JQHHV3jDwiDMG18XXB60C1ax7+pGuA5UtBMIa1yQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\trick\\source\\repos\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj",
+  "projectFilePath": "C:\\Users\\trick\\Dropbox\\source\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\trick\\.nuget\\packages\\ffmpeg.autogen\\4.2.2.2\\ffmpeg.autogen.4.2.2.2.nupkg.sha512",
     "C:\\Users\\trick\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

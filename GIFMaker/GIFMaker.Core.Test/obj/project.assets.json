@@ -202,11 +202,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\trick\\source\\repos\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj",
+      "projectUniqueName": "C:\\Users\\trick\\Dropbox\\source\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj",
       "projectName": "GIFMaker.Core.Test",
-      "projectPath": "C:\\Users\\trick\\source\\repos\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj",
+      "projectPath": "C:\\Users\\trick\\Dropbox\\source\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj",
       "packagesPath": "C:\\Users\\trick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\trick\\source\\repos\\GIFMaker\\GIFMaker.Core.Test\\obj\\",
+      "outputPath": "C:\\Users\\trick\\Dropbox\\source\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core.Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\trick\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -222,8 +222,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\trick\\source\\repos\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj": {
-              "projectPath": "C:\\Users\\trick\\source\\repos\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj"
+            "C:\\Users\\trick\\Dropbox\\source\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj": {
+              "projectPath": "C:\\Users\\trick\\Dropbox\\source\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj"
             }
           }
         }
@@ -246,18 +246,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.2, 3.1.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
