@@ -6,11 +6,3 @@ C:\Users\trick\source\repos\GIFMaker\GIFMaker.Core\obj\Debug\netstandard2.0\GIFM
 C:\Users\trick\source\repos\GIFMaker\GIFMaker.Core\obj\Debug\netstandard2.0\GIFMaker.Core.csproj.CoreCompileInputs.cache
 C:\Users\trick\source\repos\GIFMaker\GIFMaker.Core\obj\Debug\netstandard2.0\GIFMaker.Core.dll
 C:\Users\trick\source\repos\GIFMaker\GIFMaker.Core\obj\Debug\netstandard2.0\GIFMaker.Core.pdb
-C:\Users\trick\Dropbox\source\GitHub\2020-1-OSSP1-Anyway-8\GIFMaker\GIFMaker.Core\bin\Debug\netstandard2.0\GIFMaker.Core.deps.json
-C:\Users\trick\Dropbox\source\GitHub\2020-1-OSSP1-Anyway-8\GIFMaker\GIFMaker.Core\bin\Debug\netstandard2.0\GIFMaker.Core.dll
-C:\Users\trick\Dropbox\source\GitHub\2020-1-OSSP1-Anyway-8\GIFMaker\GIFMaker.Core\bin\Debug\netstandard2.0\GIFMaker.Core.pdb
-C:\Users\trick\Dropbox\source\GitHub\2020-1-OSSP1-Anyway-8\GIFMaker\GIFMaker.Core\obj\Debug\netstandard2.0\GIFMaker.Core.AssemblyInfoInputs.cache
-C:\Users\trick\Dropbox\source\GitHub\2020-1-OSSP1-Anyway-8\GIFMaker\GIFMaker.Core\obj\Debug\netstandard2.0\GIFMaker.Core.AssemblyInfo.cs
-C:\Users\trick\Dropbox\source\GitHub\2020-1-OSSP1-Anyway-8\GIFMaker\GIFMaker.Core\obj\Debug\netstandard2.0\GIFMaker.Core.csproj.CoreCompileInputs.cache
-C:\Users\trick\Dropbox\source\GitHub\2020-1-OSSP1-Anyway-8\GIFMaker\GIFMaker.Core\obj\Debug\netstandard2.0\GIFMaker.Core.dll
-C:\Users\trick\Dropbox\source\GitHub\2020-1-OSSP1-Anyway-8\GIFMaker\GIFMaker.Core\obj\Debug\netstandard2.0\GIFMaker.Core.pdb
