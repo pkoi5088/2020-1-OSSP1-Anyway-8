@@ -6,15 +6,13 @@ namespace GIFMaker.Core.Test
     {
         static void Main(string[] args)
         {
-            using (var creator = new VideoManager())
+            using (var creator = new VideoManager(@"C:\Users\trick\Desktop\1.mp4"))
             {
-                creator.LoadVideo(@"C:\Users\trick\Desktop\1.mp4");
-
                 // SaveGIF를 이용한 GIF 저장 가능
                 GifOption option = new GifOption();
                 option.delay = 1000 / 15;
                 option.start = 180 * 1000;
-                option.end = 185 * 1000;
+                option.end = 190 * 1000;
                 option.width = creator.width / 2;
                 option.height = creator.height / 2;
 
