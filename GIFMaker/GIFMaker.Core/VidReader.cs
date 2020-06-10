@@ -13,11 +13,12 @@ namespace GIFMaker.Core
         private readonly AVCodecContext* _pVCtx;
         private readonly AVFrame* _pVFrame;
         private readonly AVPacket* _packet;
-        private readonly SwsContext* _pSwsCtx;
+        private SwsContext* _pSwsCtx;
         private readonly int _VSI;
 
         public int width { get; }
         public int height { get; }
+        public int duration { get; set; }
 
         public unsafe VidReader(string videoPath)
         {
@@ -80,8 +81,233 @@ namespace GIFMaker.Core
             height = _pVCtx->height;
         }
 
+        public void Seek(long pos)
+        {
+            ffmpeg.avcodec_flush_buffers(_pVCtx);
+            ffmpeg.av_seek_frame(_pFormatCtx, -1, _pFormatCtx->start_time + pos * 1000, ffmpeg.AVSEEK_FLAG_BACKWARD);
+
+            int ret;
+            double prevPts = 0;
+
+            bool done = false;
+            while (ffmpeg.av_read_frame(_pFormatCtx, _packet) == 0 && (!done))
+            {
+                if (_packet->stream_index == _VSI)
+                { //패킷이 비디오 패킷이면...
+                    if ((ret = ffmpeg.avcodec_send_packet(_pVCtx, _packet)) != 0)
+                    {
+                        ffmpeg.av_log(null, ffmpeg.AV_LOG_ERROR, "avcodec_send_packet failed " + ret + " " + ffmpeg.AVERROR(ffmpeg.EINVAL) + " " + ffmpeg.AVERROR(ffmpeg.ENOMEM) + "\n");
+                    }
+                    while (ffmpeg.avcodec_receive_frame(_pVCtx, _pVFrame) >= 0)
+                    {
+                        // 디코딩에 성공하면 pVframe을 가져와 사용한다.
+
+                        double pts = (_pVFrame->best_effort_timestamp - _pFormatCtx->start_time);
+                        if (ffmpeg.av_q2d(_pVCtx->time_base) > 0.01)
+                            pts *= ffmpeg.av_q2d(_pVCtx->time_base) * 2;
+
+                        if (pts >= pos)
+                        {
+                            done = true;
+                            break;
+                        }
+
+                        prevPts = pts;
+                    }
+
+                }
+
+                ffmpeg.av_packet_unref(_packet);
+            }
+
+            ffmpeg.avcodec_flush_buffers(_pVCtx);
+            ffmpeg.av_seek_frame(_pFormatCtx, -1, _pFormatCtx->start_time + pos * 1000, ffmpeg.AVSEEK_FLAG_BACKWARD);
+
+            if (prevPts == 0)
+                return;
+
+            done = false;
+            while (ffmpeg.av_read_frame(_pFormatCtx, _packet) == 0 && (!done))
+            {
+                if (_packet->stream_index == _VSI)
+                {
+                    if ((ret = ffmpeg.avcodec_send_packet(_pVCtx, _packet)) != 0)
+                    {
+                        ffmpeg.av_log(null, ffmpeg.AV_LOG_ERROR, "avcodec_send_packet failed " + ret + " " + ffmpeg.AVERROR(ffmpeg.EINVAL) + " " + ffmpeg.AVERROR(ffmpeg.ENOMEM) + "\n");
+                    }
+                    while (ffmpeg.avcodec_receive_frame(_pVCtx, _pVFrame) >= 0)
+                    {
+                        double pts = (_pVFrame->best_effort_timestamp - _pFormatCtx->start_time);
+                        if (ffmpeg.av_q2d(_pVCtx->time_base) > 0.01)
+                            pts *= ffmpeg.av_q2d(_pVCtx->time_base) * 2;
+
+                        if (Math.Abs(prevPts - pts) < 2.5)
+                        {
+                            done = true;
+                            break;
+                        }
+                    }
+                }
+
+                ffmpeg.av_packet_unref(_packet);
+            }
+        }
+
+        public BitmapFrame NextBitmapFrame()
+        {
+            int ret;
+
+            while (ffmpeg.av_read_frame(_pFormatCtx, _packet) == 0)
+            {
+                if (_packet->stream_index == _VSI)
+                { //패킷이 비디오 패킷이면...
+                    if ((ret = ffmpeg.avcodec_send_packet(_pVCtx, _packet)) != 0)
+                    {
+                        ffmpeg.av_log(null, ffmpeg.AV_LOG_ERROR, "avcodec_send_packet failed " + ret + " " + ffmpeg.AVERROR(ffmpeg.EINVAL) + " " + ffmpeg.AVERROR(ffmpeg.ENOMEM) + "\n");
+                    }
+                    while (ffmpeg.avcodec_receive_frame(_pVCtx, _pVFrame) >= 0)
+                    {
+                        // 디코딩에 성공하면 pVframe을 가져와 사용한다.
+
+                        double pts = (_pVFrame->best_effort_timestamp - _pFormatCtx->start_time);
+                        if (ffmpeg.av_q2d(_pVCtx->time_base) > 0.01)
+                            pts *= ffmpeg.av_q2d(_pVCtx->time_base) * 2;
+
+                        byte[] data = new byte[3 * _pVCtx->width * _pVCtx->height];
+                        int[] outLinesize = { 3 * _pVCtx->width };
+                        fixed (byte* pData = data)
+                        {
+                            byte*[] outData = { pData };
+                            ffmpeg.sws_scale(_pSwsCtx, _pVFrame->data, _pVFrame->linesize, 0, _pVCtx->height, outData, outLinesize);
+
+                            for (int i = 0; i < data.Length; i += 3)
+                            {
+                                var temp = pData[i + 2];
+                                pData[i + 2] = pData[i];
+                                pData[i] = temp;
+                            }
+
+                            Bitmap bitmap = new Bitmap(width, height, 3 * width, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)pData);
+
+                            ffmpeg.av_packet_unref(_packet);
+                       
+                            return new BitmapFrame(bitmap, pts);
+                        }
+                    }
+                }
+
+                ffmpeg.av_packet_unref(_packet);
+            }
+
+            return null;
+        }
+
+        public void SaveGif(GifOption option, string gifPath)
+        {
+            int width = option.width;
+            if (width == 0) width = _pVCtx->width;
+
+            int height = option.height;
+            if (height == 0) height = _pVCtx->height;
+
+            _pSwsCtx = ffmpeg.sws_getContext(_pVCtx->width, _pVCtx->height, _pVCtx->pix_fmt,
+                width, height, AVPixelFormat.AV_PIX_FMT_RGB24,
+                ffmpeg.SWS_LANCZOS, null, null, null);
+
+            AnimatedGifCreator creator = new AnimatedGifCreator(gifPath, (int)option.delay);
+
+            ffmpeg.avcodec_flush_buffers(_pVCtx);
+            ffmpeg.av_seek_frame(_pFormatCtx, -1, option.start * 1000, ffmpeg.AVSEEK_FLAG_BACKWARD);
+
+            byte[] data = new byte[3 * width * height];
+            int[] outLinesize = { 3 * width };
+
+            int ret;
+            double pos = option.start;
+            double prevPts = 0;
+            bool done = false;
+
+            try
+            {
+                while (ffmpeg.av_read_frame(_pFormatCtx, _packet) == 0 && (!done))
+                {
+                    if (_packet->stream_index == _VSI)
+                    { //패킷이 비디오 패킷이면...
+                        if ((ret = ffmpeg.avcodec_send_packet(_pVCtx, _packet)) != 0)
+                        {
+                            ffmpeg.av_log(null, ffmpeg.AV_LOG_ERROR, "avcodec_send_packet failed " + ret + " " + ffmpeg.AVERROR(ffmpeg.EINVAL) + " " + ffmpeg.AVERROR(ffmpeg.ENOMEM) + "\n");
+                        }
+                        while (ffmpeg.avcodec_receive_frame(_pVCtx, _pVFrame) >= 0)
+                        {
+                            // 디코딩에 성공하면 pVframe을 가져와 사용한다.
+
+                            double pts = (_pVFrame->best_effort_timestamp - _pFormatCtx->start_time);
+                            if (ffmpeg.av_q2d(_pVCtx->time_base) > 0.01)
+                                pts *= ffmpeg.av_q2d(_pVCtx->time_base) * 2;
+
+                            // pts가 해당 위치를 넘겼다면 이제 시간에 맞는 정확한 프레임이 데이터 속에 존재할 것이다
+                            if (pts > pos)
+                            {
+                                pos += option.delay;
+                                if (pos >= option.end)
+                                {
+                                    done = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    fixed (byte* pData = data)
+                                    {
+                                        Bitmap bitmap = new Bitmap(width, height, 3 * width, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)pData);
+                                        creator.AddFrame(bitmap);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                double frame_delay = (1 + _pVFrame->repeat_pict) * (pts - prevPts);
+
+                                // frame_delay는 현재 pts와 이전 pts를 기반으로 계산된다
+                                // 따라서 프레임이 가변적인 영상의 경우 계산에 오차가 생길 가능성이 존재한다.
+                                // 이런 경우를 대비해 frame_delay에 2를 곱해 조금 전부터 미리 프레임을 복사해둔다
+                                if (prevPts == 0 || pts + frame_delay * 2 >= pos)
+                                {
+                                    fixed (byte* pData = data)
+                                    {
+                                        byte*[] outData = { pData };
+                                        ffmpeg.sws_scale(_pSwsCtx, _pVFrame->data, _pVFrame->linesize, 0, _pVCtx->height, outData, outLinesize);
+
+                                        for (int i = 0; i < data.Length; i += 3)
+                                        {
+                                            var temp = pData[i + 2];
+                                            pData[i + 2] = pData[i];
+                                            pData[i] = temp;
+                                        }
+                                    }
+                                }
+                            }
+
+                            prevPts = pts;
+                        }
+                    }
+
+                    ffmpeg.av_packet_unref(_packet);
+                }
+
+            }
+            finally
+            {
+                creator.Dispose();
+                _pSwsCtx = ffmpeg.sws_getContext(_pVCtx->width, _pVCtx->height, _pVCtx->pix_fmt,
+                    _pVCtx->width, _pVCtx->height, AVPixelFormat.AV_PIX_FMT_RGB24,
+                    ffmpeg.SWS_LANCZOS, null, null, null);
+            }
+
+
+        }
+
         // pos의 단위는 ms
-        public byte[] ByteOfPos(long pos)
+        private byte[] ByteOfPos(long pos)
         {
             ffmpeg.avcodec_flush_buffers(_pVCtx);
             ffmpeg.av_seek_frame(_pFormatCtx, -1, _pFormatCtx->start_time + pos * 1000, ffmpeg.AVSEEK_FLAG_BACKWARD);
@@ -144,7 +370,7 @@ namespace GIFMaker.Core
         }
 
         // 모든 단위는 ms
-        public List<byte[]> BytesOfPos(long start, long end, long delay)
+        private List<byte[]> BytesOfPos(long start, long end, long delay)
         {
             ffmpeg.avcodec_flush_buffers(_pVCtx);
             ffmpeg.av_seek_frame(_pFormatCtx, -1, start * 1000, ffmpeg.AVSEEK_FLAG_BACKWARD);
