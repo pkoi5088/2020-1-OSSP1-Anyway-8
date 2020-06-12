@@ -321,6 +321,9 @@ class FileDownloader(object):
     def report_file_already_downloaded(self, file_name):
         """Report file has already been fully downloaded."""
         try:
+            f = open("./info.txt",'w');
+            f.write(file_name);
+            f.close();
             self.to_screen('[download] %s has already been downloaded' % file_name)
         except UnicodeEncodeError:
             self.to_screen('[download] The file has already been downloaded')
