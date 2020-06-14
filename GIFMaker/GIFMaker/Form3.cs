@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GIFMaker.Core;
 
 namespace GIFMaker
 {
@@ -45,6 +46,36 @@ namespace GIFMaker
             }
         }
 
+        private void MetroDateTime1_ValueChanged(object sender, EventArgs e)
+        {
+           
+            
+            /*
+             *dt1.Hour : 시간 가져오기
+             * dt1.Minute : 분 가져오기
+             * dt1.Second : 초 가져오기
+             */
 
+        }
+
+        //밀리sec 구하는 함수
+        int getMilliSec(DateTime dt)
+        {
+            int MilliSec = (dt.Hour * 3600 + dt.Minute + dt.Second) * 1000;
+            return MilliSec;
+        }
+
+        private void MetroButton2_Click(object sender, EventArgs e)
+        {
+            DateTime start_dt = metroDateTime1.Value; //시작시간
+            DateTime end_dt = metroDateTime2.Value;   //종료시간
+
+            int start_time = getMilliSec(start_dt);//시작시간 밀리초로 변환
+            int end_time = getMilliSec(end_dt);//종료시간 밀리초로 변환
+
+            int x = Convert.ToInt32(metroTextBox1.Text); //가로 길이
+            int y = Convert.ToInt32(metroTextBox2.Text); //세로 길이
+            int fps = Convert.ToInt32(metroTextBox3.Text);//프레임 크기
+        }
     }
 }
