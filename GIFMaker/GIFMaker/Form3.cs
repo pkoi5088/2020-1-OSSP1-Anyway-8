@@ -39,13 +39,13 @@ namespace GIFMaker
         public Form3()
         {
             InitializeComponent();
+            //dateTimePicker1.ShowUpDown = true;
         }
 
-        private void Form3_Load(object sender, EventArgs e)
-        {
+        private void Form3_Load(object sender, EventArgs e)       {
             metroLabel1.Text = title;//폼1에서 입력받은 URL을 받아옴.
             metroLabel2.Text = outputPath;//폼1에서 입력받은 URL을 받아옴.
-            //vManager = new VideoManager(mPath);
+            //vManager = new VideoManager(filePath);
             //metroTextBox1.Text = (vManager.width / 2).ToString();
             //metroTextBox2.Text = (vManager.height / 2).ToString();
         }
@@ -75,7 +75,7 @@ namespace GIFMaker
         //밀리sec 구하는 함수
         int getMilliSec(DateTime dt)
         {
-            int MilliSec = (dt.Hour * 3600 + dt.Minute + dt.Second) * 1000;
+            int MilliSec = (dt.Hour * 3600 + dt.Minute * 60 + dt.Second) * 1000;
             return MilliSec;
         }
 
@@ -86,6 +86,16 @@ namespace GIFMaker
 
             //int start_time = getMilliSec(start_dt);//시작시간 밀리초로 변환
             //int end_time = getMilliSec(end_dt);//종료시간 밀리초로 변환
+
+            int start_h = Convert.ToInt32(metroTextBox4.Text);
+            int start_m = Convert.ToInt32(metroTextBox5.Text);
+            int start_s = Convert.ToInt32(metroTextBox6.Text);
+            int end_h = Convert.ToInt32(metroTextBox7.Text);
+            int end_m = Convert.ToInt32(metroTextBox8.Text);
+            int end_s = Convert.ToInt32(metroTextBox9.Text);
+
+            int start_MilliSec = (start_h * 3600 + start_m * 60 + start_s) * 1000;
+            int end_MilliSec = (end_h * 3600 + end_m * 60 + end_s) * 1000;
 
             int x = Convert.ToInt32(metroTextBox1.Text); //가로 길이
             int y = Convert.ToInt32(metroTextBox2.Text); //세로 길이
@@ -106,5 +116,7 @@ namespace GIFMaker
                 // Seek 및 NextBitmapFrame을 이용한 비트맵 받아오기 및 영상 재생 가능
             }
         }
+
+       
     }
 }
