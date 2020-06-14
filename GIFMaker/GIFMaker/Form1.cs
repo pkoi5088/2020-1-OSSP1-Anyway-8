@@ -60,17 +60,12 @@ namespace GIFMaker
 
         private void MetroButton2_Click(object sender, EventArgs e)
         {
-            string fileName;
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "파일 찾기";
-            saveFileDialog.OverwritePrompt = true;
-            saveFileDialog.Filter = "mp4 File(*.mp4)|*.mp4 |webm File(*.webm)|*.webm";
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                fileName = saveFileDialog.FileName;
-                // gif.Image.Save(fileName);
-            }
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            string formats = "Webm or mp4 |*.mp4; *.webm";
+            openFileDialog.Filter = formats;
+            openFileDialog.ShowDialog();
         }
 
         private void MetroTextBox1_Click(object sender, EventArgs e)

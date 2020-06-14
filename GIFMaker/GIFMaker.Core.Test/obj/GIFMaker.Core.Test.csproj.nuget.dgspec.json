@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj": {}
+    "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj": {
+    "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj",
+        "projectUniqueName": "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj",
         "projectName": "GIFMaker.Core.Test",
-        "projectPath": "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj",
+        "projectPath": "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core.Test\\GIFMaker.Core.Test.csproj",
         "packagesPath": "C:\\Users\\0733\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core.Test\\obj\\",
+        "outputPath": "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -28,8 +28,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj": {
-                "projectPath": "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj"
+              "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj": {
+                "projectPath": "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj"
               }
             }
           }
@@ -50,14 +50,14 @@
         }
       }
     },
-    "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj": {
+    "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj",
+        "projectUniqueName": "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj",
         "projectName": "GIFMaker.Core",
-        "projectPath": "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj",
+        "projectPath": "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core\\GIFMaker.Core.csproj",
         "packagesPath": "C:\\Users\\0733\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\0733\\Desktop\\2020-1-OSSP1-Anyway-8-master (1)\\2020-1-OSSP1-Anyway-8-master\\GIFMaker\\GIFMaker.Core\\obj\\",
+        "outputPath": "C:\\Users\\0733\\Documents\\GitHub\\2020-1-OSSP1-Anyway-8\\GIFMaker\\GIFMaker.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
