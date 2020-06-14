@@ -14,12 +14,27 @@ namespace GIFMaker
 
     public partial class Form3 : MetroFramework.Forms.MetroForm
     {
-        private string Form3_value;
+        private VideoManager vManager;
+
+        private string title;
+        private string filePath;
+        private string outputPath;
+        //Passvalue 제목 movePath 파일 현재위치 imagePath 결과 위치
         public string Passvalue
         {
-            get { return this.Form3_value; }
-            set { this.Form3_value = value; }
-        }// 다른폼(Form1)에서 전달받은 값을 쓰기
+            get { return this.title; }
+            set { this.title = value; }
+        }
+        public string movePath
+        {
+            get { return this.filePath; }
+            set { this.filePath = value; }
+        }
+        public string imagePath
+        {
+            get { return this.outputPath; }
+            set { this.outputPath = value; }
+        }
 
         public Form3()
         {
@@ -28,28 +43,27 @@ namespace GIFMaker
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            metroLabel1.Text = Passvalue;//폼1에서 입력받은 URL을 받아옴.
+            metroLabel1.Text = title;//폼1에서 입력받은 URL을 받아옴.
+            metroLabel2.Text = outputPath;//폼1에서 입력받은 URL을 받아옴.
+            //vManager = new VideoManager(mPath);
+            //metroTextBox1.Text = (vManager.width / 2).ToString();
+            //metroTextBox2.Text = (vManager.height / 2).ToString();
         }
 
         private void MetroButton1_Click(object sender, EventArgs e)
         {
-            string fileName;
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "저장경로 지정하세요";
-            saveFileDialog.OverwritePrompt = true;
-            saveFileDialog.Filter = "JPEG File(*.jpg)|*.jpg |Bitmap File(*.bmp)|*.bmp |PNG File(*.png)|*.png";
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            FolderBrowserDialog FBDialog = new FolderBrowserDialog();
+            if (FBDialog.ShowDialog() == DialogResult.OK)
             {
-                fileName = saveFileDialog.FileName;
-                // gif.Image.Save(fileName);
+                outputPath = FBDialog.SelectedPath;
+                metroLabel2.Text = outputPath;//폼1에서 입력받은 URL을 받아옴.
             }
         }
 
         private void MetroDateTime1_ValueChanged(object sender, EventArgs e)
         {
-           
-            
+
+
             /*
              *dt1.Hour : 시간 가져오기
              * dt1.Minute : 분 가져오기
@@ -67,15 +81,30 @@ namespace GIFMaker
 
         private void MetroButton2_Click(object sender, EventArgs e)
         {
-            DateTime start_dt = metroDateTime1.Value; //시작시간
-            DateTime end_dt = metroDateTime2.Value;   //종료시간
+            //DateTime start_dt = metroDateTime1.Value; //시작시간
+            //DateTime end_dt = metroDateTime2.Value;   //종료시간
 
-            int start_time = getMilliSec(start_dt);//시작시간 밀리초로 변환
-            int end_time = getMilliSec(end_dt);//종료시간 밀리초로 변환
+            //int start_time = getMilliSec(start_dt);//시작시간 밀리초로 변환
+            //int end_time = getMilliSec(end_dt);//종료시간 밀리초로 변환
 
             int x = Convert.ToInt32(metroTextBox1.Text); //가로 길이
             int y = Convert.ToInt32(metroTextBox2.Text); //세로 길이
-            int fps = Convert.ToInt32(metroTextBox3.Text);//프레임 크기
+            //int fps = Convert.ToInt32(metroTextBox3.Text);//프레임 크기
+
+            using (vManager)
+            {
+                // SaveGIF를 이용한 GIF 저장 가능
+                GifOption option = new GifOption();
+                option.delay = 1000 / 15;
+                option.start = 180 * 1000;
+                option.end = 190 * 1000;
+                option.width = x;
+                option.height = y;
+
+                vManager.SaveGif(option, outputPath + @"\test.gif");
+
+                // Seek 및 NextBitmapFrame을 이용한 비트맵 받아오기 및 영상 재생 가능
+            }
         }
     }
 }

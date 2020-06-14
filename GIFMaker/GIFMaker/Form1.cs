@@ -21,7 +21,10 @@ namespace GIFMaker
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            if (Directory.Exists(@".\image") == false)
+            {
+                Directory.CreateDirectory(@".\image");
+            }
         }
 
         private void MetroButton1_Click(object sender, EventArgs e)
@@ -48,8 +51,11 @@ namespace GIFMaker
             //파일 이동완료
             if (File.Exists(movePath) == true)
             {
+                //Passvalue 제목 movePath 파일 현재위치 imagePath 결과 위치
                 Form3 mainForm = new Form3();
                 mainForm.Passvalue = fileName;
+                mainForm.movePath = System.IO.Directory.GetCurrentDirectory() + @"\video";
+                mainForm.imagePath = System.IO.Directory.GetCurrentDirectory() + @"\image";
                 mainForm.Show();
             }
             else
@@ -60,12 +66,18 @@ namespace GIFMaker
 
         private void MetroButton2_Click(object sender, EventArgs e)
         {
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "파일 찾기";
+            openFileDialog.Filter = "mp4 File|*.mp4|webm File|*.webm";
 
-            string formats = "Webm or mp4 |*.mp4; *.webm";
-            openFileDialog.Filter = formats;
-            openFileDialog.ShowDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //Passvalue 제목 movePath 파일 현재위치 imagePath 결과 위치
+                Form3 mainForm = new Form3();
+                mainForm.Passvalue = Path.GetFileName(openFileDialog.FileName);
+                mainForm.imagePath = System.IO.Directory.GetCurrentDirectory() + @"\image";
+                mainForm.Show();
+            }
         }
 
         private void MetroTextBox1_Click(object sender, EventArgs e)
