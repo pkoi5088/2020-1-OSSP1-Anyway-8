@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GIFMaker.Core;
+using System.Threading;
 
 namespace GIFMaker
 {
@@ -40,6 +41,7 @@ namespace GIFMaker
         {
             InitializeComponent();
             //dateTimePicker1.ShowUpDown = true;
+            
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -93,6 +95,47 @@ namespace GIFMaker
             if (numericUpDown1.Value > numericUpDown2.Value)
             {
                 numericUpDown1.Value = numericUpDown2.Value;
+            }
+        }
+
+        private void MetroButton3_Click(object sender, EventArgs e)
+        {
+            long start = (long)(Convert.ToDouble(numericUpDown1.Value) * 1000);
+            long end = (long)(Convert.ToDouble(numericUpDown2.Value) * 1000);
+            long delay = 1000 / 15;
+            int slice = (int)((end - start));
+            Bitmap[] board = new Bitmap[slice];
+            using (vManager)
+            {
+                int i = 0;
+                 vManager.Seek(start);
+                 while (i < slice)
+                 {
+                     var bmp = vManager.NextBitmapFrame().bitmap;
+                     board[i++] = bmp;
+                 }
+                 i = 0;
+                 while (i<slice)
+                 {
+                     metroPanel1.BackgroundImage = board[i++];
+                     Thread.Sleep((int)delay);
+                     Application.DoEvents();
+                 }
+                
+                 /*
+                vManager.Seek(start);
+                var bmp = vManager.NextBitmapFrame().bitmap;
+                while (start <= end)
+                {
+                    vManager.Seek(start);
+                    //metroPanel1.BackgroundImage = bmp;
+                    
+                    bmp = vManager.NextBitmapFrame().bitmap;
+                    start += delay;
+                    Thread.Sleep((int)delay);
+                    Application.DoEvents();
+                }
+                */
             }
         }
     }

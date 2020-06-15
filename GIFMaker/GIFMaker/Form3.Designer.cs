@@ -41,6 +41,7 @@
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.metroButton3 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -68,6 +69,7 @@
             // 
             // metroPanel1
             // 
+            this.metroPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
@@ -165,11 +167,23 @@
             this.metroLabel6.TabIndex = 15;
             this.metroLabel6.Text = "구간설정(단위, 초)";
             // 
+            // metroButton3
+            // 
+            this.metroButton3.BackgroundImage = global::GIFMaker.Properties.Resources.재생;
+            this.metroButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.metroButton3.Location = new System.Drawing.Point(314, 396);
+            this.metroButton3.Name = "metroButton3";
+            this.metroButton3.Size = new System.Drawing.Size(46, 44);
+            this.metroButton3.TabIndex = 16;
+            this.metroButton3.UseSelectable = true;
+            this.metroButton3.Click += new System.EventHandler(this.MetroButton3_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 512);
+            this.Controls.Add(this.metroButton3);
             this.Controls.Add(this.metroLabel6);
             this.Controls.Add(this.numericUpDown4);
             this.Controls.Add(this.numericUpDown3);
@@ -209,5 +223,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
         private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroButton metroButton3;
     }
 }
