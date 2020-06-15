@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B461C789-5D29-48A2-B50F-647FC7BD4C10}</ProjectGuid>
+    <ProjectGuid>{A61C9410-BA50-414D-874F-6EA7194A4A65}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>GIFMaker</RootNamespace>
     <AssemblyName>GIFMaker</AssemblyName>
@@ -69,9 +69,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -97,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GIFMaker.Core\GIFMaker.Core.csproj">
-      <Project>{39f17f8c-0f7e-4f12-8f3d-943579a85021}</Project>
+      <Project>{9dab78d7-6354-4de4-ac77-595e329a8dd9}</Project>
       <Name>GIFMaker.Core</Name>
     </ProjectReference>
   </ItemGroup>

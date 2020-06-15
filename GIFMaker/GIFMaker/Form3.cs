@@ -42,7 +42,8 @@ namespace GIFMaker
             //dateTimePicker1.ShowUpDown = true;
         }
 
-        private void Form3_Load(object sender, EventArgs e)       {
+        private void Form3_Load(object sender, EventArgs e)
+        {
             metroLabel1.Text = title;//폼1에서 입력받은 URL을 받아옴.
             metroLabel2.Text = outputPath;//폼1에서 입력받은 URL을 받아옴.
             //vManager = new VideoManager(filePath);
@@ -117,6 +118,6 @@ namespace GIFMaker
             }
         }
 
-       
+
     }
 }

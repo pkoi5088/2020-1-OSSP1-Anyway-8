@@ -1,5 +1,5 @@
 ﻿using System;
-
+using GIFMaker.Core;
 
 namespace GIFMaker.Core.Test
 {
