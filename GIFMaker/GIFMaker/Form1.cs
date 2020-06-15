@@ -25,6 +25,11 @@ namespace GIFMaker
             {
                 Directory.CreateDirectory(@".\image");
             }
+            if (File.Exists(@".\info.txt") == true)
+            {
+                FileStream f = new FileStream(@".\info.txt", FileMode.Truncate, FileAccess.Write);
+                f.Close();
+            }
         }
 
         private void MetroButton1_Click(object sender, EventArgs e)
@@ -34,6 +39,12 @@ namespace GIFMaker
             {
                 Directory.CreateDirectory(@".\video");
             }
+            //info.txt 초기화
+            if (File.Exists(@".\info.txt") == true)
+            {
+                FileStream f = new FileStream(@".\info.txt", FileMode.Truncate, FileAccess.Write);
+                f.Close();
+            }
             string url = metroTextBox1.Text;
             Process p = new Process();
             p.StartInfo.FileName = "__main__.exe";
@@ -42,6 +53,11 @@ namespace GIFMaker
             p.WaitForExit();
             //파일입출력
             string fileName = getFileName();
+            if(fileName == "")
+            {
+                System.Windows.Forms.MessageBox.Show("동영상을 다운로드 받지 못했습니다.");
+                return;
+            }
             string filePath = ".\\" + fileName;
             string movePath = ".\\video\\" + fileName;
             if (File.Exists(movePath) == false && File.Exists(filePath) == true)
@@ -88,9 +104,16 @@ namespace GIFMaker
 
         private string getFileName()
         {
-            string path = @".\info.txt";
-            string[] textValue = System.IO.File.ReadAllLines(path);
-            return textValue[0];
+            try
+            {
+                string path = @".\info.txt";
+                string[] textValue = System.IO.File.ReadAllLines(path);
+                return textValue[0];
+            }
+            catch (Exception)
+            {
+                return "";
+            }
         }
     }
 

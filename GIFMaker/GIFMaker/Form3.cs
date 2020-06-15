@@ -48,15 +48,23 @@ namespace GIFMaker
         {
             metroLabel1.Text = title;//폼1에서 입력받은 URL을 받아옴.
             metroLabel2.Text = outputPath;//폼1에서 입력받은 URL을 받아옴.
-            vManager = new VideoManager(filePath);
-            numericUpDown1.Maximum = vManager.duration;
-            numericUpDown2.Maximum = vManager.duration;
-            numericUpDown3.Maximum = vManager.width;
-            numericUpDown4.Maximum = vManager.height;
-            numericUpDown1.Value = 0;
-            numericUpDown2.Value = Convert.ToDecimal((double)vManager.duration / 1000);
-            numericUpDown3.Value = Convert.ToDecimal(vManager.width);
-            numericUpDown4.Value = Convert.ToDecimal(vManager.height);
+            try
+            {
+                vManager = new VideoManager(filePath);
+                numericUpDown1.Maximum = vManager.duration;
+                numericUpDown2.Maximum = vManager.duration;
+                numericUpDown3.Maximum = vManager.width;
+                numericUpDown4.Maximum = vManager.height;
+                numericUpDown1.Value = 0;
+                numericUpDown2.Value = Convert.ToDecimal((double)vManager.duration / 1000);
+                numericUpDown3.Value = Convert.ToDecimal(vManager.width);
+                numericUpDown4.Value = Convert.ToDecimal(vManager.height);
+            }catch(Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Form3_Load에서 예외발생");
+                Application.ExitThread();
+                Environment.Exit(0);
+            }
         }
 
         private void MetroButton1_Click(object sender, EventArgs e)
@@ -71,8 +79,8 @@ namespace GIFMaker
 
         private void MetroButton2_Click(object sender, EventArgs e)
         {
-            int start = (int)(Convert.ToDouble(numericUpDown1.Value) * 1000);
-            int end = (int)(Convert.ToDouble(numericUpDown2.Value) * 1000);
+            long start = (long)(Convert.ToDouble(numericUpDown1.Value) * 1000);
+            long end = (long)(Convert.ToDouble(numericUpDown2.Value) * 1000);
             int w = Convert.ToInt32(numericUpDown3.Value);
             int h = Convert.ToInt32(numericUpDown4.Value);
             using (vManager)
@@ -85,7 +93,7 @@ namespace GIFMaker
                 option.width = w;
                 option.height = h;
 
-                vManager.SaveGif(option, outputPath + @"\test.gif");
+                vManager.SaveGif(option, outputPath + '\\' + title + ".gif");
                 System.Windows.Forms.MessageBox.Show("생성완료");
             }
         }
@@ -107,35 +115,7 @@ namespace GIFMaker
             Bitmap[] board = new Bitmap[slice];
             using (vManager)
             {
-                int i = 0;
-                 vManager.Seek(start);
-                 while (i < slice)
-                 {
-                     var bmp = vManager.NextBitmapFrame().bitmap;
-                     board[i++] = bmp;
-                 }
-                 i = 0;
-                 while (i<slice)
-                 {
-                     metroPanel1.BackgroundImage = board[i++];
-                     Thread.Sleep((int)delay);
-                     Application.DoEvents();
-                 }
-                
-                 /*
-                vManager.Seek(start);
-                var bmp = vManager.NextBitmapFrame().bitmap;
-                while (start <= end)
-                {
-                    vManager.Seek(start);
-                    //metroPanel1.BackgroundImage = bmp;
-                    
-                    bmp = vManager.NextBitmapFrame().bitmap;
-                    start += delay;
-                    Thread.Sleep((int)delay);
-                    Application.DoEvents();
-                }
-                */
+
             }
         }
     }
