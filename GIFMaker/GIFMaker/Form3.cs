@@ -118,5 +118,32 @@ namespace GIFMaker
 
             }
         }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked == true)
+            {
+                numericUpDown3.Value = Convert.ToDecimal(vManager.width);
+                numericUpDown4.Value = Convert.ToDecimal(vManager.height);
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked == true)
+            {
+                numericUpDown3.Value = Convert.ToDecimal(vManager.width / 2);
+                numericUpDown4.Value = Convert.ToDecimal(vManager.height / 2);
+            }
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton3.Checked == true)
+            {
+                numericUpDown3.Value = Convert.ToDecimal((int)(vManager.width * 0.3));
+                numericUpDown4.Value = Convert.ToDecimal((int)(vManager.height * 0.3));
+            }
+        }
     }
 }

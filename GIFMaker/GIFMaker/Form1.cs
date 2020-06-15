@@ -53,7 +53,7 @@ namespace GIFMaker
             p.WaitForExit();
             //파일입출력
             string fileName = getFileName();
-            if(fileName == "")
+            if (fileName == "")
             {
                 System.Windows.Forms.MessageBox.Show("동영상을 다운로드 받지 못했습니다.");
                 return;
