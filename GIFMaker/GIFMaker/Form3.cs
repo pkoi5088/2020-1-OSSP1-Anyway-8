@@ -46,9 +46,15 @@ namespace GIFMaker
         {
             metroLabel1.Text = title;//폼1에서 입력받은 URL을 받아옴.
             metroLabel2.Text = outputPath;//폼1에서 입력받은 URL을 받아옴.
-            //vManager = new VideoManager(filePath);
-            //metroTextBox1.Text = (vManager.width / 2).ToString();
-            //metroTextBox2.Text = (vManager.height / 2).ToString();
+            vManager = new VideoManager(filePath);
+            numericUpDown1.Maximum = vManager.duration;
+            numericUpDown2.Maximum = vManager.duration;
+            numericUpDown3.Maximum = vManager.width;
+            numericUpDown4.Maximum = vManager.height;
+            numericUpDown1.Value = 0;
+            numericUpDown2.Value = Convert.ToDecimal((double)vManager.duration / 1000);
+            numericUpDown3.Value = Convert.ToDecimal(vManager.width);
+            numericUpDown4.Value = Convert.ToDecimal(vManager.height);
         }
 
         private void MetroButton1_Click(object sender, EventArgs e)
@@ -61,63 +67,33 @@ namespace GIFMaker
             }
         }
 
-        private void MetroDateTime1_ValueChanged(object sender, EventArgs e)
-        {
-
-
-            /*
-             *dt1.Hour : 시간 가져오기
-             * dt1.Minute : 분 가져오기
-             * dt1.Second : 초 가져오기
-             */
-
-        }
-
-        //밀리sec 구하는 함수
-        int getMilliSec(DateTime dt)
-        {
-            int MilliSec = (dt.Hour * 3600 + dt.Minute * 60 + dt.Second) * 1000;
-            return MilliSec;
-        }
-
         private void MetroButton2_Click(object sender, EventArgs e)
         {
-            //DateTime start_dt = metroDateTime1.Value; //시작시간
-            //DateTime end_dt = metroDateTime2.Value;   //종료시간
-
-            //int start_time = getMilliSec(start_dt);//시작시간 밀리초로 변환
-            //int end_time = getMilliSec(end_dt);//종료시간 밀리초로 변환
-
-            int start_h = Convert.ToInt32(metroTextBox4.Text);
-            int start_m = Convert.ToInt32(metroTextBox5.Text);
-            int start_s = Convert.ToInt32(metroTextBox6.Text);
-            int end_h = Convert.ToInt32(metroTextBox7.Text);
-            int end_m = Convert.ToInt32(metroTextBox8.Text);
-            int end_s = Convert.ToInt32(metroTextBox9.Text);
-
-            int start_MilliSec = (start_h * 3600 + start_m * 60 + start_s) * 1000;
-            int end_MilliSec = (end_h * 3600 + end_m * 60 + end_s) * 1000;
-
-            int x = Convert.ToInt32(metroTextBox1.Text); //가로 길이
-            int y = Convert.ToInt32(metroTextBox2.Text); //세로 길이
-            //int fps = Convert.ToInt32(metroTextBox3.Text);//프레임 크기
-
+            int start = (int)(Convert.ToDouble(numericUpDown1.Value) * 1000);
+            int end = (int)(Convert.ToDouble(numericUpDown2.Value) * 1000);
+            int w = Convert.ToInt32(numericUpDown3.Value);
+            int h = Convert.ToInt32(numericUpDown4.Value);
             using (vManager)
             {
                 // SaveGIF를 이용한 GIF 저장 가능
                 GifOption option = new GifOption();
                 option.delay = 1000 / 15;
-                option.start = 180 * 1000;
-                option.end = 190 * 1000;
-                option.width = x;
-                option.height = y;
+                option.start = start;
+                option.end = end;
+                option.width = w;
+                option.height = h;
 
                 vManager.SaveGif(option, outputPath + @"\test.gif");
-
-                // Seek 및 NextBitmapFrame을 이용한 비트맵 받아오기 및 영상 재생 가능
+                System.Windows.Forms.MessageBox.Show("생성완료");
             }
         }
 
-
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown1.Value > numericUpDown2.Value)
+            {
+                numericUpDown1.Value = numericUpDown2.Value;
+            }
+        }
     }
 }

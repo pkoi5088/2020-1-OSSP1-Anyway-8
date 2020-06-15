@@ -1,0 +1,9 @@
+D:\OSSP\Anyway\GIFMaker\GIFMaker.Core\bin\x64\Debug\GIFMaker.Core.dll
+D:\OSSP\Anyway\GIFMaker\GIFMaker.Core\bin\x64\Debug\GIFMaker.Core.pdb
+D:\OSSP\Anyway\GIFMaker\GIFMaker.Core\bin\x64\Debug\FFmpeg.AutoGen.dll
+D:\OSSP\Anyway\GIFMaker\GIFMaker.Core\bin\x64\Debug\FFmpeg.AutoGen.xml
+D:\OSSP\Anyway\GIFMaker\GIFMaker.Core\obj\x64\Debug\GIFMaker.Core.csprojAssemblyReference.cache
+D:\OSSP\Anyway\GIFMaker\GIFMaker.Core\obj\x64\Debug\GIFMaker.Core.csproj.CoreCompileInputs.cache
+D:\OSSP\Anyway\GIFMaker\GIFMaker.Core\obj\x64\Debug\GIFMaker.Core.csproj.CopyComplete
+D:\OSSP\Anyway\GIFMaker\GIFMaker.Core\obj\x64\Debug\GIFMaker.Core.dll
+D:\OSSP\Anyway\GIFMaker\GIFMaker.Core\obj\x64\Debug\GIFMaker.Core.pdb
