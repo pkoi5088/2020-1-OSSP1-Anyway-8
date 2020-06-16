@@ -46,11 +46,19 @@ namespace GIFMaker
                 f.Close();
             }
             string url = metroTextBox1.Text;
-            Process p = new Process();
-            p.StartInfo.FileName = "__main__.exe";
-            p.StartInfo.Arguments = "-f \"bestvideo[height<=1080]\" " + url;
-            p.Start();
-            p.WaitForExit();
+            try
+            {
+                Process p = new Process();
+                p.StartInfo.FileName = "__main__.exe";
+                p.StartInfo.Arguments = "-f \"bestvideo[height<=1080]\" " + url;
+                p.Start();
+                p.WaitForExit();
+            }
+            catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("동영상을 다운로드 받을 수 없습니다.");
+                return;
+            }
             //파일입출력
             string fileName = getFileName();
             if (fileName == "")
