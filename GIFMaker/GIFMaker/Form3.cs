@@ -43,6 +43,15 @@ namespace GIFMaker
             //dateTimePicker1.ShowUpDown = true;
             
         }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleparam = base.CreateParams;
+                handleparam.ExStyle |= 0x02000000;
+                return handleparam;
+            }
+        }
 
         private void Form3_Load(object sender, EventArgs e)
         {
@@ -113,9 +122,19 @@ namespace GIFMaker
             long delay = 1000 / 15;
             int slice = (int)((end - start));
             Bitmap[] board = new Bitmap[slice];
+
             using (vManager)
             {
-
+                var bmp = vManager.NextBitmapFrame().bitmap;
+                while (start <= end)
+                {
+                    vManager.Seek(start);
+                    bmp = vManager.NextBitmapFrame().bitmap;
+                    metroPanel1.BackgroundImage = bmp;
+                    start += delay;
+                    Thread.Sleep((int)delay);
+                    Application.DoEvents();
+                }
             }
         }
 
