@@ -20,7 +20,7 @@ namespace GIFMaker.Core.Test
                 creator.SaveGif(option, "test.gif");
 
                 // Seek 및 NextBitmapFrame을 이용한 비트맵 받아오기 및 영상 재생 가능
-                creator.Seek(0);
+                creator.Seek(185 * 1000);
                 var bmp = creator.NextBitmapFrame().bitmap;
                 bmp.Save("test.png");
             }

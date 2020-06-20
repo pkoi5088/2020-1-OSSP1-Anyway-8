@@ -1,4 +1,5 @@
 ﻿using FFmpeg.AutoGen;
+using nQuant;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -73,9 +74,7 @@ namespace GIFMaker.Core
             _pVFrame = ffmpeg.av_frame_alloc(); //alloc 않하면 밑에서 프레임을 받아올수 없다.
             _packet = ffmpeg.av_packet_alloc(); //패킷 데이터
 
-            _pSwsCtx = ffmpeg.sws_getContext(_pVCtx->width, _pVCtx->height, _pVCtx->pix_fmt,
-                _pVCtx->width, _pVCtx->height, AVPixelFormat.AV_PIX_FMT_RGB24,
-                ffmpeg.SWS_LANCZOS, null, null, null);
+            SetContext();
 
             width = _pVCtx->width;
             height = _pVCtx->height;
@@ -166,7 +165,7 @@ namespace GIFMaker.Core
             ffmpeg.sws_freeContext(_pSwsCtx);
 
             _pSwsCtx = ffmpeg.sws_getContext(_pVCtx->width, _pVCtx->height, _pVCtx->pix_fmt,
-                width, height, AVPixelFormat.AV_PIX_FMT_RGB24,
+                width, height, AVPixelFormat.AV_PIX_FMT_BGRA,
                 ffmpeg.SWS_LANCZOS, null, null, null);
         }
 
@@ -191,21 +190,14 @@ namespace GIFMaker.Core
                         if (ffmpeg.av_q2d(_pVCtx->time_base) > 0.01)
                             pts *= ffmpeg.av_q2d(_pVCtx->time_base) * 2;
 
-                        byte[] data = new byte[3 * _pVCtx->width * _pVCtx->height];
-                        int[] outLinesize = { 3 * _pVCtx->width };
+                        byte[] data = new byte[4 * _pVCtx->width * _pVCtx->height];
+                        int[] outLinesize = { 4 * _pVCtx->width };
                         fixed (byte* pData = data)
                         {
                             byte*[] outData = { pData };
                             ffmpeg.sws_scale(_pSwsCtx, _pVFrame->data, _pVFrame->linesize, 0, _pVCtx->height, outData, outLinesize);
 
-                            for (int i = 0; i < data.Length; i += 3)
-                            {
-                                var temp = pData[i + 2];
-                                pData[i + 2] = pData[i];
-                                pData[i] = temp;
-                            }
-
-                            Bitmap bitmap = new Bitmap(width, height, 3 * width, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)pData);
+                            Bitmap bitmap = new Bitmap(width, height, 4 * width, System.Drawing.Imaging.PixelFormat.Format32bppArgb, (IntPtr)pData);
 
                             ffmpeg.av_packet_unref(_packet);
 
@@ -223,6 +215,9 @@ namespace GIFMaker.Core
         // GIF 저장하기. 이 함수를 호출 시 context가 날라간다. 따라서 함수 호출 후 context를 재설정해줄 필요가 있다.
         public void SaveGif(GifOption option, string gifPath)
         {
+            var quantizer = new WuQuantizer();
+            AnimatedGifCreator creator = new AnimatedGifCreator(gifPath, (int)option.delay);
+
             int width = option.width;
             if (width == 0) width = _pVCtx->width;
 
@@ -231,13 +226,11 @@ namespace GIFMaker.Core
 
             SetContext(width, height);
 
-            AnimatedGifCreator creator = new AnimatedGifCreator(gifPath, (int)option.delay);
-
             ffmpeg.avcodec_flush_buffers(_pVCtx);
             ffmpeg.av_seek_frame(_pFormatCtx, -1, option.start * 1000, ffmpeg.AVSEEK_FLAG_BACKWARD);
 
-            byte[] data = new byte[3 * width * height];
-            int[] outLinesize = { 3 * width };
+            byte[] data = new byte[4 * width * height];
+            int[] outLinesize = { 4 * width };
 
             int ret;
             double pos = option.start;
@@ -275,8 +268,11 @@ namespace GIFMaker.Core
                                 {
                                     fixed (byte* pData = data)
                                     {
-                                        Bitmap bitmap = new Bitmap(width, height, 3 * width, System.Drawing.Imaging.PixelFormat.Format24bppRgb, (IntPtr)pData);
-                                        creator.AddFrame(bitmap);
+                                        Bitmap bitmap = new Bitmap(width, height, 4 * width, System.Drawing.Imaging.PixelFormat.Format32bppArgb, (IntPtr)pData);
+                                        var quanted = quantizer.QuantizeImage(bitmap);
+                                        creator.AddFrame(quanted);
+                                        bitmap.Dispose();
+                                        quanted.Dispose();
                                     }
                                 }
                             }
@@ -293,13 +289,6 @@ namespace GIFMaker.Core
                                     {
                                         byte*[] outData = { pData };
                                         ffmpeg.sws_scale(_pSwsCtx, _pVFrame->data, _pVFrame->linesize, 0, _pVCtx->height, outData, outLinesize);
-
-                                        for (int i = 0; i < data.Length; i += 3)
-                                        {
-                                            var temp = pData[i + 2];
-                                            pData[i + 2] = pData[i];
-                                            pData[i] = temp;
-                                        }
                                     }
                                 }
                             }
