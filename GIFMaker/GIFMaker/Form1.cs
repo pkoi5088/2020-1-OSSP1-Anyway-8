@@ -46,17 +46,27 @@ namespace GIFMaker
                 f.Close();
             }
             string url = metroTextBox1.Text;
+            string fileName;
             try
             {
                 Process p = new Process();
                 p.StartInfo.FileName = "__main__.exe";
                 p.StartInfo.Arguments = "-f \"webm[height<=1080]\" " + url;
-                if (radioButton2.Checked == true)
-                {
-                    p.StartInfo.Arguments = "-f \"mp4[height<=1080]\" " + url;
-                }
                 p.Start();
                 p.WaitForExit();
+                fileName = getFileName();
+                if (fileName == "")
+                {
+                    p.StartInfo.Arguments = "-f \"mp4[height<=1080]\" " + url;
+                    p.Start();
+                    p.WaitForExit();
+                    fileName = getFileName();
+                    if (fileName == "")
+                    {
+                        System.Windows.Forms.MessageBox.Show("동영상을 다운로드 받지 못했습니다.");
+                        return;
+                    }
+                }
             }
             catch (Exception)
             {
@@ -64,12 +74,6 @@ namespace GIFMaker
                 return;
             }
             //파일입출력
-            string fileName = getFileName();
-            if (fileName == "")
-            {
-                System.Windows.Forms.MessageBox.Show("동영상을 다운로드 받지 못했습니다.");
-                return;
-            }
             string filePath = ".\\" + fileName;
             string movePath = ".\\video\\" + fileName;
             if (File.Exists(movePath) == false && File.Exists(filePath) == true)
