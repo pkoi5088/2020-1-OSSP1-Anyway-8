@@ -84,11 +84,12 @@ namespace GIFMaker
             if (File.Exists(movePath) == true)
             {
                 //Passvalue 제목 movePath 파일 현재위치 imagePath 결과 위치
-                Form3 mainForm = new Form3();
+                Form3 mainForm = new Form3(this);
                 mainForm.Passvalue = fileName;
                 mainForm.movePath = System.IO.Directory.GetCurrentDirectory() + @"\video\" + fileName;
                 mainForm.imagePath = System.IO.Directory.GetCurrentDirectory() + @"\image";
                 mainForm.Show();
+                this.Hide();
             }
             else
             {
@@ -105,11 +106,12 @@ namespace GIFMaker
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 //Passvalue 제목 movePath 파일 현재위치 imagePath 결과 위치
-                Form3 mainForm = new Form3();
+                Form3 mainForm = new Form3(this);
                 mainForm.Passvalue = Path.GetFileName(openFileDialog.FileName);
                 mainForm.movePath = openFileDialog.FileName;
                 mainForm.imagePath = System.IO.Directory.GetCurrentDirectory() + @"\image";
                 mainForm.Show();
+                this.Hide();
             }
         }
 
