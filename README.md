@@ -14,10 +14,12 @@ Python - 동영상 다운로드
 ### 사용 라이브러리
 ffmpeg : https://ffmpeg.org/  
 FFmpeg.AutoGen : https://github.com/Ruslan-B/FFmpeg.AutoGen  
-nQiant : https://archive.codeplex.com/?p=nquant
+nQuant : https://archive.codeplex.com/?p=nquant
+
+### 참고한 오픈소스 프로젝트
+https://github.com/mrousavy/AnimatedGif
 
 ### 실행 환경
-Visual Studio C#  
 .NET Framework 4.7.2 이상
 
 ### 실행 방법
