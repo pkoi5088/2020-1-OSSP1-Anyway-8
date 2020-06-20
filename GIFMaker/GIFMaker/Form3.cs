@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GIFMaker.Core;
 using System.Threading;
+using System.Diagnostics;
 
 namespace GIFMaker
 {
 
     public partial class Form3 : MetroFramework.Forms.MetroForm
     {
-        private VideoManager vManager;
+        private VideoManager vManager = null;
+        private Form1 parentForm;
 
         private string title;
         private string filePath;
@@ -37,8 +39,12 @@ namespace GIFMaker
             set { this.outputPath = value; }
         }
 
-        public Form3()
+        bool playing = false;
+        bool stopPlay = false;
+
+        public Form3(Form1 parentForm)
         {
+            this.parentForm = parentForm;
             InitializeComponent();
             //dateTimePicker1.ShowUpDown = true;
             
@@ -59,6 +65,9 @@ namespace GIFMaker
             metroLabel2.Text = outputPath;//폼1에서 입력받은 URL을 받아옴.
             try
             {
+                if (vManager != null)
+                    vManager.Dispose();
+
                 vManager = new VideoManager(filePath);
                 numericUpDown1.Maximum = vManager.duration;
                 numericUpDown2.Maximum = vManager.duration;
@@ -92,19 +101,17 @@ namespace GIFMaker
             long end = (long)(Convert.ToDouble(numericUpDown2.Value) * 1000);
             int w = Convert.ToInt32(numericUpDown3.Value);
             int h = Convert.ToInt32(numericUpDown4.Value);
-            using (vManager)
-            {
-                // SaveGIF를 이용한 GIF 저장 가능
-                GifOption option = new GifOption();
-                option.delay = 1000 / 15;
-                option.start = start;
-                option.end = end;
-                option.width = w;
-                option.height = h;
 
-                vManager.SaveGif(option, outputPath + '\\' + title + ".gif");
-                System.Windows.Forms.MessageBox.Show("생성완료");
-            }
+            // SaveGIF를 이용한 GIF 저장 가능
+            GifOption option = new GifOption();
+            option.delay = 1000 / 15;
+            option.start = start;
+            option.end = end;
+            option.width = w;
+            option.height = h;
+
+            vManager.SaveGif(option, outputPath + '\\' + title + ".gif");
+            System.Windows.Forms.MessageBox.Show("생성완료");
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -115,27 +122,67 @@ namespace GIFMaker
             }
         }
 
-        private void MetroButton3_Click(object sender, EventArgs e)
+        private async void MetroButton3_Click(object sender, EventArgs e)
         {
-            long start = (long)(Convert.ToDouble(numericUpDown1.Value) * 1000);
-            long end = (long)(Convert.ToDouble(numericUpDown2.Value) * 1000);
-            long delay = 1000 / 15;
-            int slice = (int)((end - start));
-            Bitmap[] board = new Bitmap[slice];
-
-            using (vManager)
+            if (playing)
             {
-                var bmp = vManager.NextBitmapFrame().bitmap;
-                while (start <= end)
+                stopPlay = true;
+                while (playing)
                 {
-                    vManager.Seek(start);
-                    bmp = vManager.NextBitmapFrame().bitmap;
-                    metroPanel1.BackgroundImage = bmp;
-                    start += delay;
-                    Thread.Sleep((int)delay);
-                    Application.DoEvents();
+                    await Task.Delay(100);
                 }
             }
+
+            stopPlay = false;
+            playing = true;
+
+            Stopwatch stopWatch = new Stopwatch();
+
+            long start = (long)(Convert.ToDouble(numericUpDown1.Value) * 1000);
+            long end = (long)(Convert.ToDouble(numericUpDown2.Value) * 1000);
+
+            vManager.Seek(start);
+
+            {
+                var frame = vManager.NextBitmapFrame();
+                if (frame == null)
+                {
+                    playing = false;
+                    return;
+                }
+
+                start = (long)frame.pts;
+
+                metroPanel1.BackgroundImage = null;
+                metroPanel1.Refresh();
+
+                stopWatch.Start();
+                metroPanel1.BackgroundImage = frame.bitmap;
+                metroPanel1.Refresh();
+            }
+
+            while (!stopPlay)
+            {
+                var frame = vManager.NextBitmapFrame();
+                if (frame == null || (long)frame.pts > end)
+                {
+                    break;
+                }
+
+                long toWait = (long)frame.pts - start;
+
+                while (toWait > stopWatch.ElapsedMilliseconds)
+                {
+                    Thread.Sleep(1);
+                    Application.DoEvents();
+                }
+
+                //Thread.Sleep((int)(toWait - stopWatch.ElapsedMilliseconds));
+
+                metroPanel1.BackgroundImage = frame.bitmap;
+                metroPanel1.Refresh();
+            }
+            playing = false;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -164,5 +211,25 @@ namespace GIFMaker
                 numericUpDown4.Value = Convert.ToDecimal((int)(vManager.height * 0.3));
             }
         }
+
+        private async void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (vManager != null)
+                vManager.Dispose();
+
+            if (playing)
+            {
+                stopPlay = true;
+                while (playing)
+                {
+                    await Task.Delay(100);
+                }
+            }
+            stopPlay = false;
+
+            parentForm.Show();
+            this.Dispose();
+        }
+
     }
 }

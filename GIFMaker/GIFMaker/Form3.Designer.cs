@@ -54,17 +54,18 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(201, 11);
+            this.metroLabel1.Location = new System.Drawing.Point(176, 9);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(83, 20);
+            this.metroLabel1.Size = new System.Drawing.Size(78, 19);
             this.metroLabel1.TabIndex = 0;
             this.metroLabel1.Text = "동영상 URL";
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(119, 42);
+            this.metroButton1.Location = new System.Drawing.Point(104, 34);
+            this.metroButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(75, 23);
+            this.metroButton1.Size = new System.Drawing.Size(66, 18);
             this.metroButton1.TabIndex = 1;
             this.metroButton1.Text = "찾기";
             this.metroButton1.UseSelectable = true;
@@ -75,20 +76,22 @@
             this.metroPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(80, 81);
+            this.metroPanel1.HorizontalScrollbarSize = 8;
+            this.metroPanel1.Location = new System.Drawing.Point(70, 65);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(700, 309);
+            this.metroPanel1.Size = new System.Drawing.Size(612, 247);
             this.metroPanel1.TabIndex = 2;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
+            this.metroPanel1.VerticalScrollbarSize = 9;
             // 
             // metroButton2
             // 
-            this.metroButton2.Location = new System.Drawing.Point(883, 447);
+            this.metroButton2.Location = new System.Drawing.Point(773, 358);
+            this.metroButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(75, 23);
+            this.metroButton2.Size = new System.Drawing.Size(66, 18);
             this.metroButton2.TabIndex = 3;
             this.metroButton2.Text = "생성";
             this.metroButton2.UseSelectable = true;
@@ -97,76 +100,80 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(201, 45);
+            this.metroLabel2.Location = new System.Drawing.Point(176, 36);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(107, 20);
+            this.metroLabel2.Size = new System.Drawing.Size(101, 19);
             this.metroLabel2.TabIndex = 4;
             this.metroLabel2.Text = "파일 저장 위치";
             // 
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(172, 405);
+            this.metroLabel3.Location = new System.Drawing.Point(150, 324);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(19, 20);
+            this.metroLabel3.Size = new System.Drawing.Size(18, 19);
             this.metroLabel3.TabIndex = 6;
             this.metroLabel3.Text = "~";
             // 
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(786, 205);
+            this.metroLabel4.Location = new System.Drawing.Point(688, 164);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(50, 20);
+            this.metroLabel4.Size = new System.Drawing.Size(48, 19);
             this.metroLabel4.TabIndex = 9;
             this.metroLabel4.Text = "가로 : ";
             // 
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(786, 240);
+            this.metroLabel5.Location = new System.Drawing.Point(688, 192);
             this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(50, 20);
+            this.metroLabel5.Size = new System.Drawing.Size(48, 19);
             this.metroLabel5.TabIndex = 9;
             this.metroLabel5.Text = "세로 : ";
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.DecimalPlaces = 3;
-            this.numericUpDown1.Location = new System.Drawing.Point(72, 405);
+            this.numericUpDown1.Location = new System.Drawing.Point(63, 324);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(94, 25);
+            this.numericUpDown1.Size = new System.Drawing.Size(82, 21);
             this.numericUpDown1.TabIndex = 11;
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // numericUpDown2
             // 
             this.numericUpDown2.DecimalPlaces = 3;
-            this.numericUpDown2.Location = new System.Drawing.Point(197, 405);
+            this.numericUpDown2.Location = new System.Drawing.Point(172, 324);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(94, 25);
+            this.numericUpDown2.Size = new System.Drawing.Size(82, 21);
             this.numericUpDown2.TabIndex = 12;
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(838, 205);
+            this.numericUpDown3.Location = new System.Drawing.Point(733, 164);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(88, 25);
+            this.numericUpDown3.Size = new System.Drawing.Size(77, 21);
             this.numericUpDown3.TabIndex = 13;
             // 
             // numericUpDown4
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(838, 240);
+            this.numericUpDown4.Location = new System.Drawing.Point(733, 192);
+            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(88, 25);
+            this.numericUpDown4.Size = new System.Drawing.Size(77, 21);
             this.numericUpDown4.TabIndex = 14;
             // 
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(72, 447);
+            this.metroLabel6.Location = new System.Drawing.Point(63, 358);
             this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(129, 20);
+            this.metroLabel6.Size = new System.Drawing.Size(122, 19);
             this.metroLabel6.TabIndex = 15;
             this.metroLabel6.Text = "구간설정(단위, 초)";
             // 
@@ -174,9 +181,10 @@
             // 
             this.metroButton3.BackgroundImage = global::GIFMaker.Properties.Resources.재생;
             this.metroButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.metroButton3.Location = new System.Drawing.Point(314, 396);
+            this.metroButton3.Location = new System.Drawing.Point(275, 317);
+            this.metroButton3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.metroButton3.Name = "metroButton3";
-            this.metroButton3.Size = new System.Drawing.Size(46, 44);
+            this.metroButton3.Size = new System.Drawing.Size(40, 35);
             this.metroButton3.TabIndex = 16;
             this.metroButton3.UseSelectable = true;
             this.metroButton3.Click += new System.EventHandler(this.MetroButton3_Click);
@@ -185,9 +193,10 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(815, 94);
+            this.radioButton1.Location = new System.Drawing.Point(713, 75);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(63, 19);
+            this.radioButton1.Size = new System.Drawing.Size(51, 16);
             this.radioButton1.TabIndex = 17;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "100%";
@@ -197,9 +206,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(815, 129);
+            this.radioButton2.Location = new System.Drawing.Point(713, 103);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(55, 19);
+            this.radioButton2.Size = new System.Drawing.Size(45, 16);
             this.radioButton2.TabIndex = 18;
             this.radioButton2.Text = "50%";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -208,9 +218,10 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(815, 163);
+            this.radioButton3.Location = new System.Drawing.Point(713, 130);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(55, 19);
+            this.radioButton3.Size = new System.Drawing.Size(45, 16);
             this.radioButton3.TabIndex = 19;
             this.radioButton3.Text = "30%";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -218,9 +229,9 @@
             // 
             // Form3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 512);
+            this.ClientSize = new System.Drawing.Size(870, 410);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
@@ -238,7 +249,10 @@
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.metroLabel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form3";
+            this.Padding = new System.Windows.Forms.Padding(18, 48, 18, 16);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
