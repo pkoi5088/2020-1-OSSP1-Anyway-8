@@ -52,20 +52,17 @@ namespace GIFMaker
                 Process p = new Process();
                 p.StartInfo.FileName = "__main__.exe";
                 p.StartInfo.Arguments = "-f \"webm[height<=1080]\" " + url;
+                if (radioButton2.Checked == true)
+                {
+                    p.StartInfo.Arguments = "-f \"bestvideo[height<=1080][ext=mp4]\" " + url;
+                }
                 p.Start();
                 p.WaitForExit();
                 fileName = getFileName();
                 if (fileName == "")
                 {
-                    p.StartInfo.Arguments = "-f \"mp4[height<=1080]\" " + url;
-                    p.Start();
-                    p.WaitForExit();
-                    fileName = getFileName();
-                    if (fileName == "")
-                    {
-                        System.Windows.Forms.MessageBox.Show("동영상을 다운로드 받지 못했습니다.");
-                        return;
-                    }
+                    System.Windows.Forms.MessageBox.Show("동영상을 다운로드 받지 못했습니다.");
+                    return;
                 }
             }
             catch (Exception)
