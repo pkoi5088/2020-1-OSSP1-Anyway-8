@@ -73,11 +73,15 @@ namespace GIFMaker
                 numericUpDown2.Maximum = vManager.duration;
                 numericUpDown3.Maximum = vManager.width;
                 numericUpDown4.Maximum = vManager.height;
+                numericUpDown5.Maximum = 30;
+                numericUpDown5.Minimum = 1;
                 numericUpDown1.Value = 0;
                 numericUpDown2.Value = Convert.ToDecimal((double)vManager.duration / 1000);
                 numericUpDown3.Value = Convert.ToDecimal(vManager.width);
                 numericUpDown4.Value = Convert.ToDecimal(vManager.height);
-            }catch(Exception)
+                numericUpDown5.Value = 15;
+            }
+            catch(Exception)
             {
                 System.Windows.Forms.MessageBox.Show("Form3_Load에서 예외발생");
                 Application.ExitThread();
@@ -101,10 +105,11 @@ namespace GIFMaker
             long end = (long)(Convert.ToDouble(numericUpDown2.Value) * 1000);
             int w = Convert.ToInt32(numericUpDown3.Value);
             int h = Convert.ToInt32(numericUpDown4.Value);
+            int fps = Convert.ToInt32(numericUpDown5.Value);
 
             // SaveGIF를 이용한 GIF 저장 가능
             GifOption option = new GifOption();
-            option.delay = 1000 / 15;
+            option.delay = 1000 / fps;
             option.start = start;
             option.end = end;
             option.width = w;
@@ -124,65 +129,72 @@ namespace GIFMaker
 
         private async void MetroButton3_Click(object sender, EventArgs e)
         {
-            if (playing)
+            try
             {
-                stopPlay = true;
-                while (playing)
+                if (playing)
                 {
-                    await Task.Delay(100);
+                    stopPlay = true;
+                    while (playing)
+                    {
+                        await Task.Delay(100);
+                    }
                 }
+
+                stopPlay = false;
+                playing = true;
+
+                Stopwatch stopWatch = new Stopwatch();
+
+                long start = (long)(Convert.ToDouble(numericUpDown1.Value) * 1000);
+                long end = (long)(Convert.ToDouble(numericUpDown2.Value) * 1000);
+
+                vManager.Seek(start);
+
+                {
+                    var frame = vManager.NextBitmapFrame();
+                    if (frame == null)
+                    {
+                        playing = false;
+                        return;
+                    }
+
+                    start = (long)frame.pts;
+
+                    metroPanel1.BackgroundImage = null;
+                    metroPanel1.Refresh();
+
+                    stopWatch.Start();
+                    metroPanel1.BackgroundImage = frame.bitmap;
+                    metroPanel1.Refresh();
+                }
+
+                while (!stopPlay)
+                {
+                    var frame = vManager.NextBitmapFrame();
+                    if (frame == null || (long)frame.pts > end)
+                    {
+                        break;
+                    }
+
+                    long toWait = (long)frame.pts - start;
+
+                    while (toWait > stopWatch.ElapsedMilliseconds)
+                    {
+                        Thread.Sleep(1);
+                        Application.DoEvents();
+                    }
+
+                    //Thread.Sleep((int)(toWait - stopWatch.ElapsedMilliseconds));
+
+                    metroPanel1.BackgroundImage = frame.bitmap;
+                    metroPanel1.Refresh();
+                }
+                playing = false;
             }
-
-            stopPlay = false;
-            playing = true;
-
-            Stopwatch stopWatch = new Stopwatch();
-
-            long start = (long)(Convert.ToDouble(numericUpDown1.Value) * 1000);
-            long end = (long)(Convert.ToDouble(numericUpDown2.Value) * 1000);
-
-            vManager.Seek(start);
-
+            catch (Exception)
             {
-                var frame = vManager.NextBitmapFrame();
-                if (frame == null)
-                {
-                    playing = false;
-                    return;
-                }
-
-                start = (long)frame.pts;
-
-                metroPanel1.BackgroundImage = null;
-                metroPanel1.Refresh();
-
-                stopWatch.Start();
-                metroPanel1.BackgroundImage = frame.bitmap;
-                metroPanel1.Refresh();
+                System.Windows.Forms.MessageBox.Show("동영상 재생을 중지합니다.");
             }
-
-            while (!stopPlay)
-            {
-                var frame = vManager.NextBitmapFrame();
-                if (frame == null || (long)frame.pts > end)
-                {
-                    break;
-                }
-
-                long toWait = (long)frame.pts - start;
-
-                while (toWait > stopWatch.ElapsedMilliseconds)
-                {
-                    Thread.Sleep(1);
-                    Application.DoEvents();
-                }
-
-                //Thread.Sleep((int)(toWait - stopWatch.ElapsedMilliseconds));
-
-                metroPanel1.BackgroundImage = frame.bitmap;
-                metroPanel1.Refresh();
-            }
-            playing = false;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
